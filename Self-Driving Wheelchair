@@ -1,0 +1,135 @@
+#include <Pixy2.h>
+
+const int LeftPWM = 6;
+const int RightPWM = 5;
+const int LeftDir = 3;
+const int RightDir = 10;
+const int LeftIR = 8;
+const int RightIR = 7;
+const int FrontIR1 = 4;
+const int FrontIR2 = 2;
+
+// This is the main Pixy object
+Pixy2 pixy;
+
+int cont = 0;
+int signature, x, y, width, height;
+float cx, cy, area;
+
+void setup()
+{
+  Serial.begin(115200);
+  pinMode(LeftPWM, OUTPUT);
+  pinMode(RightPWM, OUTPUT);
+  pinMode(RightDir, OUTPUT);
+  pinMode(LeftDir, OUTPUT);
+  pinMode(LeftIR, INPUT);
+  pinMode(RightIR, INPUT);
+  pinMode(FrontIR1, INPUT);
+  pinMode(FrontIR2, INPUT);
+
+  Serial.print("Starting...\n");
+
+  pixy.init();
+  delay(5000);
+}
+
+void loop()
+{
+  int Leftside = digitalRead(LeftIR);
+  int Rightside = digitalRead(RightIR);
+  int Front1 = digitalRead(FrontIR1);
+  int Front2 = digitalRead(FrontIR2);
+
+  if (Leftside == 0)
+  {
+    stop();
+    delay(500);
+    backward();
+    delay(500);
+    moveRight();
+    delay(1000);
+    digitalWrite(RightDir, LOW);
+    digitalWrite(LeftDir, HIGH);
+    forward();
+    delay(500);
+    stop();
+  }
+  else if (Rightside == 0)
+  {
+    stop();
+    delay(500);
+    backward();
+    delay(500);
+    moveLeft();
+    delay(1000);
+    digitalWrite(RightDir, LOW);
+    digitalWrite(LeftDir, HIGH);
+    forward();
+    delay(500);
+    stop();
+  }
+  else if (Front1 == 0)
+  {
+    stop();
+    Serial.println("Obstacle detected in front!");
+  }
+  else if(Front2 == 0)
+  {
+    stop();
+    Serial.println("Obstacle detected in front!");
+
+  }
+  else if (pixy.ccc.getBlocks()){
+      forward();
+      Serial.println("Block detected! Moving forward...");
+
+  }else{
+    stop();
+  }
+
+  Serial.println(Rightside);
+}   
+      
+
+
+
+void forward()
+{
+  digitalWrite(RightDir, LOW);
+  digitalWrite(LeftDir, HIGH);
+  analogWrite(LeftPWM,90);
+  analogWrite(RightPWM, 90);
+}
+
+void stop()
+{
+  analogWrite(LeftPWM, 0);
+  analogWrite(RightPWM, 0);
+}
+
+void backward()
+{
+  digitalWrite(RightDir, HIGH); //backward
+  digitalWrite(LeftDir, LOW);   //backward
+  analogWrite(LeftPWM, 120);
+  analogWrite(RightPWM, 120);
+}
+
+void moveRight()
+{
+  digitalWrite(RightDir, HIGH);
+  digitalWrite(LeftDir, HIGH);
+  analogWrite(LeftPWM, 100);
+  analogWrite(RightPWM, 100);
+  
+}
+
+void moveLeft()
+{
+  digitalWrite(RightDir, LOW);
+  digitalWrite(LeftDir, LOW);
+  analogWrite(LeftPWM, 100);
+  analogWrite(RightPWM, 100);
+ 
+}
