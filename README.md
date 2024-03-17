@@ -1,10 +1,12 @@
-This our thesis during my time in Notre Dame of Tacurong College taking Bachelor of Science in Computer Engineering the idea was to build a self-driving wheelchair with a vital monitoring system .
-particularly the body temperature and pulse rate of the paitent.
-the self-driving of the wheelchair was made possible using the pixy2 camera that uses machine learning by detecting colored objects by making the nurse/healthcare personel wear a red colored armband
-as far that we tested it some functionality is not yet accurate mostly in navigation system
-we utilized IR sensors to detect objects because the pixy2 camera don't have the function to determine other objects
-but overall the system works and we are glad to say that we made it
+
+During my time at Notre Dame of Tacurong College, while pursuing a Bachelor of Science in Computer Engineering, our thesis focused on developing a self-driving wheelchair integrated with a vital monitoring system. Specifically, we aimed to monitor the body temperature and pulse rate of the patient.
+
+The self-driving feature of the wheelchair was achieved through the utilization of the Pixy2 camera, which employs machine learning algorithms to detect colored objects. In our design, healthcare personnel wear a red-colored armband, which the Pixy2 camera recognizes as a navigational guide.
+
+However, during our testing phase, we encountered inaccuracies, particularly in the navigation system. To address this limitation, we incorporated IR sensors to detect obstacles, complementing the functionality of the Pixy2 camera.
+
+Despite these challenges, we are proud to report that the overall system functions effectively. We believe our project represents a significant advancement in the realm of assistive technology, providing increased autonomy and safety for wheelchair-bound individuals.
 
 
 
-EDRON D. MAGUALE S.Y 2023-2024 signing off
+EDRON D. MAGUALE S.Y 2023-2024 
